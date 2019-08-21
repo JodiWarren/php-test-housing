@@ -1,0 +1,31 @@
+version: "3"
+
+volumes:
+  mysql_data_php-worksim:
+
+services:
+  mailcatcher:
+    image: schickling/mailcatcher
+    ports:
+      - "1080:1080"
+
+  mysql:
+    image: mariadb:10
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data_php-worksim:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_ROOT_PASSWORD: foobar
+
+  wordpress:
+    image: thedxw/wpc-wordpress
+    ports:
+      - "80:80"
+    links:
+      - mysql
+      - mailcatcher
+    volumes:
+      - .:/usr/src/app
+      - ./wp-content:/var/www/html/wp-content

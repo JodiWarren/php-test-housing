@@ -1,0 +1,6 @@
+#!/bin/sh
+set -e
+#
+# Runs all site setup scripts
+
+docker-compose exec wordpress /usr/src/app/setup/internal.sh
