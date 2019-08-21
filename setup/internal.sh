@@ -58,4 +58,4 @@ else
 fi
 
 wp option update show_on_front page
-wp option update page_on_front 5
+wp option update page_on_front 7
