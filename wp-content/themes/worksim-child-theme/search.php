@@ -10,11 +10,13 @@
  * @version 1.0
  */
 
+global $wp_query;
+$orderby = $wp_query->query_vars['orderby'];
+
 get_header(); ?>
 
 <div class="wrap">
-
-	<header class="page-header">
+    <header class="page-header">
 		<?php if ( have_posts() ) : ?>
 			<h1 class="page-title"><?php printf( __( 'Search Results for: %s', 'twentyseventeen' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
 		<?php else : ?>
@@ -24,6 +26,13 @@ get_header(); ?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
+			<h3>
+            <?php
+                if ($orderby !== null) {
+                    echo sprintf('Sorted by %s', $orderby);
+                }
+            ?>
+            </h3>
             <div class="sort-options">
                 <a class="sort-option sort-option--date" href="/?s=repair&housingorder=date">Sort by Date</a>
                 <a class="sort-option sort-option--relevance" href="/?s=repair&housingorder=relevance">Sort by Relevance</a>
